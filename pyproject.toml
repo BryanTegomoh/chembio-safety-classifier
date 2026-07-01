@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "chembio-safety-classifier"
+version = "0.1.0"
+description = "Policy and evaluation framework for ChemBio risk classification in advanced AI systems."
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [
+  { name = "Bryan Tegomoh, MD, MPH" }
+]
+license = { text = "Research use only pending public release review" }
+keywords = [
+  "ai-safety",
+  "biosecurity",
+  "chemical-safety",
+  "refusal-calibration",
+  "frontier-models"
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+

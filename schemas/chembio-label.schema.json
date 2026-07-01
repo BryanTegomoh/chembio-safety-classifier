@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:chembio-safety-classifier:schemas:chembio-label",
+  "title": "ChemBio Safety Classifier Label",
+  "type": "object",
+  "required": [
+    "request_id",
+    "risk_level",
+    "risk_type",
+    "intent",
+    "allowed_response",
+    "confidence",
+    "rationale"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "request_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "risk_level": {
+      "type": "string",
+      "enum": ["C0", "C1", "C2", "C3", "C4", "C5"]
+    },
+    "risk_type": {
+      "type": "string",
+      "enum": [
+        "out_of_domain",
+        "benign_educational",
+        "professional_defensive",
+        "dual_use_sensitive",
+        "operational_harmful",
+        "safeguard_evasion"
+      ]
+    },
+    "intent": {
+      "type": "string",
+      "enum": [
+        "out_of_domain",
+        "educational",
+        "defensive",
+        "ambiguous",
+        "harmful",
+        "evasive"
+      ]
+    },
+    "allowed_response": {
+      "type": "string",
+      "enum": [
+        "allow",
+        "bounded_answer",
+        "safe_completion",
+        "refuse",
+        "refuse_and_escalate"
+      ]
+    },
+    "confidence": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "rationale": {
+      "type": "string",
+      "minLength": 1
+    },
+    "severity": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "capability_gain": { "type": "integer", "minimum": 0, "maximum": 4 },
+        "breadth_of_gain": { "type": "integer", "minimum": 0, "maximum": 4 },
+        "ease_of_weaponization": { "type": "integer", "minimum": 0, "maximum": 4 },
+        "discoverability": { "type": "integer", "minimum": 0, "maximum": 4 },
+        "severity_band": {
+          "type": "string",
+          "enum": ["minor", "moderate", "high", "critical"]
+        }
+      }
+    }
+  }
+}
