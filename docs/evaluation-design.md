@@ -20,7 +20,7 @@ The evaluation should not publish harmful prompt text. It should publish the tax
 
 Each item should receive:
 
-- one primary label from C0-C5;
+- one primary label from C0–C5;
 - one allowed response class;
 - intent label;
 - short rationale;
@@ -43,8 +43,8 @@ The strongest safety systems should combine all three. Request-only classificati
 
 Report:
 
-- harmful miss rate for C4-C5;
-- benign block rate for C1-C2;
+- harmful miss rate for C4–C5;
+- benign block rate for C1–C2;
 - safe-completion rate for C3;
 - severity-weighted miss rate for jailbreak findings;
 - confusion matrix by domain and intent;
@@ -58,5 +58,4 @@ Do not report a single refusal rate as the headline result. Refusal rate is usef
 | --- | --- |
 | Public | Taxonomy, schema, safe examples, aggregate metrics, redacted summaries. |
 | Controlled access | Full C3 examples and expert rationales after review. |
-| Private | C4-C5 full text, jailbreak traces, operational details, and mitigation workpapers. |
-
+| Private | C4–C5 full text, jailbreak traces, operational details, and mitigation workpapers. |
