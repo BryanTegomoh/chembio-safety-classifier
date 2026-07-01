@@ -10,20 +10,11 @@ This repository turns that problem into a concrete framework: a label taxonomy, 
 
 Refusal is a confusion matrix, not a virtue signal.
 
-```mermaid
-quadrantChart
-    title ChemBio classifier outcomes
-    x-axis Classifier allows or safely bounds --> Classifier refuses or escalates
-    y-axis Actual safe or legitimate --> Actual harmful or unsafe
-    quadrant-1 True positive
-    quadrant-2 False negative
-    quadrant-3 True negative
-    quadrant-4 False positive
-    C4/C5 blocked: [0.82, 0.82]
-    C4/C5 missed: [0.18, 0.82]
-    C1/C2 served: [0.18, 0.18]
-    C1/C2 blocked: [0.82, 0.18]
-```
+The matrix below is the operating map for the project. It shows what should pass, what should not pass, and which errors matter for safety versus scientific utility.
+
+![ChemBio safety classifier confusion matrix](assets/chembio-confusion-matrix.svg)
+
+In this diagram, **pass** means the classifier made the correct decision. A true positive passes because the system blocked a harmful request. A true negative passes because the system served a legitimate request.
 
 | Outcome | What It Means | Safety Consequence | Product Consequence |
 | --- | --- | --- | --- |
@@ -59,6 +50,14 @@ flowchart LR
     F --> G["Expert review<br/>false positive, false negative, policy gap"]
     G --> H["Eval and training updates"]
     H --> B
+    classDef input fill:#e8f1ff,stroke:#175cd3,stroke-width:1.5px,color:#172033;
+    classDef policy fill:#eef8ee,stroke:#067647,stroke-width:1.5px,color:#172033;
+    classDef review fill:#fff3d6,stroke:#b54708,stroke-width:1.5px,color:#172033;
+    classDef output fill:#f7e8ff,stroke:#7f56d9,stroke-width:1.5px,color:#172033;
+    class A,B input;
+    class C,E,F policy;
+    class D output;
+    class G,H review;
 ```
 
 This loop tests three surfaces:
