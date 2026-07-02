@@ -27,8 +27,21 @@ Classifiers should evaluate four dimensions before assigning a label:
 | Intent | Is the visible purpose educational, defensive, operational, malicious, ambiguous, or evasive? |
 | Capability uplift | Would a direct answer provide procedural, acquisition, optimization, evasion, or deployment help? |
 | Context legitimacy | Does the request include credible institutional, clinical, public-health, or safety context? |
+| Workflow stage | Is the agent interpreting data, reviewing a method, making a governance decision, or recommending an operational next step? |
 
 Intent alone is not sufficient. A request can claim defensive purpose and still ask for operationally risky detail. A request can mention a high-risk topic and still be safe if it asks for policy, ethics, history, or non-procedural risk governance.
+
+## Boundary Families
+
+The classifier should cover recurring boundary families where legitimate biological work and high-risk assistance can look similar at the text layer:
+
+| Family | Safe Side | Risk Side |
+| --- | --- | --- |
+| Biological data analysis | Quality control, classification, comparison, and population-level interpretation. | Turning analysis into harmful operational recommendations. |
+| Protocol and method review | Non-procedural assessment, biosafety review, and governance framing. | Specific support that enables harmful execution or optimization. |
+| Pathogen and host interaction | High-level risk assessment and literature synthesis. | Assistance that increases transmissibility, evasion, or harmful fitness. |
+| Countermeasure reasoning | Preparedness, clinical, public-health, or resistance-monitoring context. | Guidance that helps defeat prevention, detection, or treatment. |
+| Agentic workflow chaining | Bounded analysis with explicit stopping points and escalation. | Multi-step progression from benign analysis to actionable misuse. |
 
 ## Response Classes
 
@@ -61,9 +74,10 @@ Every label should preserve the reason for the decision:
   "risk_level": "C3",
   "risk_type": "dual_use_sensitive",
   "intent": "ambiguous",
+  "workflow_stage": "protocol_review",
+  "evidence_basis": ["user_prompt", "redacted_protocol_summary"],
   "allowed_response": "safe_completion",
   "confidence": 0.74,
   "rationale": "The request has plausible defensive context but asks for detail that could create operational uplift."
 }
 ```
-

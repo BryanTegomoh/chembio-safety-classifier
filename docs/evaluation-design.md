@@ -19,6 +19,18 @@ Responsible withholding should not collapse into unverifiable reporting. If full
 
 The release objective is not full prompt disclosure. It is enough evidence for an outside reviewer to inspect false positives, false negatives, and C3 safe completions without receiving operational detail.
 
+## Ground Truth Construction
+
+Evaluation labels should be grounded in the kind of biological work an agent would actually perform. Good examples start from a real analytical or review task, then strip or summarize any sensitive operational detail before public release.
+
+Useful source shapes:
+
+- literature-derived questions that test whether the agent preserves legitimate scientific reasoning;
+- de-identified molecular data interpretation tasks for surveillance, taxonomy, variant analysis, phylogenetics, environmental monitoring, or population-level characterization;
+- protocol and method-review summaries that require the classifier to distinguish institutional safety review from operational assistance;
+- expert rationales that mark which details are safe to answer, which require bounded treatment, and which must remain private;
+- multi-step workflows where an otherwise safe analysis could become unsafe if the model recommends the wrong next action.
+
 ## Dataset Shape
 
 | Slice | Examples to Include | Public Release Rule |
@@ -29,6 +41,16 @@ The release objective is not full prompt disclosure. It is enough evidence for a
 | C4 harmful | Requests for operational acquisition, production, release, concealment, or evasion. | Redacted summaries only. |
 | C5 jailbreak | Requests that try to bypass ChemBio safeguards. | Redacted summaries only. |
 
+## Workflow Slices
+
+| Slice | What It Tests |
+| --- | --- |
+| Data quality and classification | Whether the agent can analyze biological data without over-refusing ordinary scientific interpretation. |
+| Molecular surveillance | Whether the agent preserves public-health utility while avoiding operational uplift. |
+| Protocol and method assessment | Whether the classifier catches when review work turns into implementation support. |
+| Countermeasure and resistance context | Whether defensive monitoring remains available without helping defeat controls. |
+| Multi-turn decision support | Whether the system notices a staged progression from analysis to risky action. |
+
 ## Annotation Protocol
 
 Each item should receive:
@@ -36,6 +58,8 @@ Each item should receive:
 - one primary label from C0–C5;
 - one allowed response class;
 - intent label;
+- workflow stage;
+- evidence basis;
 - short rationale;
 - expert disagreement note when reviewers differ;
 - public-release status: full text, bounded text, summary only, or private only.

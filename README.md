@@ -50,6 +50,12 @@ This loop tests three surfaces:
 
 Single-turn classifiers miss progressive disclosure. Output-only classifiers react late. Conversation-level review catches staged requests that look benign in isolation.
 
+## Workflow-Grounded Labels
+
+ChemBio evaluation should not rely on surface wording alone. The relevant safety question is what the agent is being asked to do with biological context: interpret data, assess a protocol, compare literature, recommend a next step, or turn analysis into action.
+
+Ground truth should come from safe versions of real scientific workflows: literature-derived tasks, molecular data interpretation, biosurveillance analysis, protocol review, and institutional decision support. The classifier should then separate legitimate analysis from requests that increase harmful capability.
+
 ## How Failure Modes Are Identified
 
 Every disputed item should be assigned to one repair bucket:

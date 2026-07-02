@@ -44,6 +44,35 @@
         "evasive"
       ]
     },
+    "workflow_stage": {
+      "type": "string",
+      "enum": [
+        "not_applicable",
+        "education",
+        "data_interpretation",
+        "protocol_review",
+        "literature_review",
+        "governance_decision",
+        "operational_next_step",
+        "multi_turn_workflow"
+      ]
+    },
+    "evidence_basis": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "user_prompt",
+          "model_output",
+          "conversation_context",
+          "redacted_protocol_summary",
+          "redacted_data_summary",
+          "literature_source",
+          "expert_review"
+        ]
+      },
+      "uniqueItems": true
+    },
     "allowed_response": {
       "type": "string",
       "enum": [
