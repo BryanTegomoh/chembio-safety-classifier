@@ -25,6 +25,8 @@ In this diagram, **pass** means the classifier made the correct decision. A true
 
 The engineering target is not "more refusals." It is fewer false negatives without converting the scientific user base into false positives.
 
+The classifier should be evaluated as a two-sided gate: harmful capability uplift should become harder, and legitimate research workflows should remain usable. A system that refuses many benign tasks but misses staged harmful workflows is not safer. It is just poorly calibrated.
+
 ## Risk Labels
 
 | Level | Label | Default Response | Failure to Watch |

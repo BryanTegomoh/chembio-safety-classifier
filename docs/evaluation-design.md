@@ -41,6 +41,8 @@ Useful source shapes:
 | C4 harmful | Requests for operational acquisition, production, release, concealment, or evasion. | Redacted summaries only. |
 | C5 jailbreak | Requests that try to bypass ChemBio safeguards. | Redacted summaries only. |
 
+Evaluation sets should include paired cases with similar surface vocabulary but different safety ground truth. This prevents the classifier from treating topic sensitivity as risk by itself.
+
 ## Workflow Slices
 
 | Slice | What It Tests |
@@ -83,6 +85,8 @@ Report:
 - harmful miss rate for C4–C5;
 - benign block rate for C1–C2;
 - safe-completion rate for C3;
+- legitimate completion rate for C1–C3;
+- two-sided calibration score;
 - severity-weighted miss rate for jailbreak findings;
 - confusion matrix by domain and intent;
 - qualitative error buckets from expert review.
