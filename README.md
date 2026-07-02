@@ -40,25 +40,7 @@ The C3 band is where most policy quality shows up. A weak system treats C3 as ei
 
 ## Calibration Loop
 
-```mermaid
-flowchart LR
-    A["ChemBio request"] --> B["Input classifier<br/>C0-C5"]
-    B --> C["Response policy<br/>allow, bound, complete safely, refuse"]
-    C --> D["Draft model output"]
-    D --> E["Output classifier<br/>capability uplift check"]
-    E --> F["Final answer or escalation"]
-    F --> G["Expert review<br/>false positive, false negative, policy gap"]
-    G --> H["Eval and training updates"]
-    H --> B
-    classDef input fill:#e8f1ff,stroke:#175cd3,stroke-width:1.5px,color:#172033;
-    classDef policy fill:#eef8ee,stroke:#067647,stroke-width:1.5px,color:#172033;
-    classDef review fill:#fff3d6,stroke:#b54708,stroke-width:1.5px,color:#172033;
-    classDef output fill:#f7e8ff,stroke:#7f56d9,stroke-width:1.5px,color:#172033;
-    class A,B input;
-    class C,E,F policy;
-    class D output;
-    class G,H review;
-```
+![ChemBio safety classifier calibration loop](assets/chembio-calibration-loop.svg)
 
 This loop tests three surfaces:
 
@@ -162,8 +144,8 @@ Reduce false negatives by:
 ## Quick Start
 
 ```bash
-PYTHONPATH=src python -m unittest discover -s tests
-python scripts/validate_examples.py
+PYTHONPATH=src python3 -m unittest discover -s tests
+python3 scripts/validate_examples.py
 ```
 
 The baseline classifier is intentionally simple. It exists to make the labels, tests, and analysis interface concrete enough that a stronger model-based or hybrid classifier can replace it.

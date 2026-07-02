@@ -1,0 +1,119 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="640" viewBox="0 0 1200 640" role="img" aria-labelledby="title desc">
+  <title id="title">ChemBio calibration loop</title>
+  <desc id="desc">A readable workflow diagram showing request classification, response policy, output checks, final answer or escalation, expert review, and evaluation updates.</desc>
+  <defs>
+    <style>
+      .bg { fill: #f7f8fb; }
+      text { font-family: Helvetica; }
+      .title { font-size: 34px; font-weight: 700; fill: #172033; }
+      .subtitle { font-size: 18px; font-weight: 500; fill: #4b5874; }
+      .card-title { font-size: 20px; font-weight: 800; fill: #172033; }
+      .card-copy { font-size: 15px; font-weight: 500; fill: #34415f; }
+      .step { font-size: 13px; font-weight: 800; fill: #ffffff; letter-spacing: .7px; }
+      .label { font-size: 14px; font-weight: 700; fill: #34415f; }
+      .mini { font-size: 13px; font-weight: 500; fill: #4b5874; }
+      .arrow { fill: none; stroke: #5b6680; stroke-width: 3; marker-end: url(#arrowhead); }
+      .feedback { fill: none; stroke: #b54708; stroke-width: 4; stroke-linecap: round; stroke-dasharray: 9 8; marker-end: url(#feedbackhead); }
+      .surface { fill: #ffffff; stroke: #d7deea; stroke-width: 1.5; }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#5b6680" />
+    </marker>
+    <marker id="feedbackhead" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#b54708" />
+    </marker>
+    <filter id="shadow" x="-12%" y="-12%" width="124%" height="124%">
+      <feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#172033" flood-opacity="0.10"/>
+    </filter>
+  </defs>
+
+  <rect class="bg" width="1200" height="640"/>
+
+  <text class="title" x="70" y="62">Calibration loop</text>
+  <text class="subtitle" x="70" y="94">Every boundary decision becomes evidence for the next classifier update.</text>
+
+  <g filter="url(#shadow)">
+    <rect x="70" y="132" width="180" height="170" rx="16" fill="#e8f1ff" stroke="#175cd3" stroke-width="2"/>
+    <rect x="94" y="154" width="70" height="28" rx="14" fill="#175cd3"/>
+    <text class="step" x="129" y="174" text-anchor="middle">STEP 1</text>
+    <text class="card-title" x="94" y="215">Request</text>
+    <text class="card-title" x="94" y="239">classifier</text>
+    <text class="card-copy" x="94" y="269">Label the user</text>
+    <text class="card-copy" x="94" y="291">request from C0-C5.</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="300" y="132" width="190" height="170" rx="16" fill="#e9f7ef" stroke="#067647" stroke-width="2"/>
+    <rect x="324" y="154" width="70" height="28" rx="14" fill="#067647"/>
+    <text class="step" x="359" y="174" text-anchor="middle">STEP 2</text>
+    <text class="card-title" x="324" y="215">Response</text>
+    <text class="card-title" x="324" y="239">boundary</text>
+    <text class="card-copy" x="324" y="269">Allow, bound, safely</text>
+    <text class="card-copy" x="324" y="291">complete, or refuse.</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="540" y="132" width="190" height="170" rx="16" fill="#f2e9ff" stroke="#7f56d9" stroke-width="2"/>
+    <rect x="564" y="154" width="70" height="28" rx="14" fill="#7f56d9"/>
+    <text class="step" x="599" y="174" text-anchor="middle">STEP 3</text>
+    <text class="card-title" x="564" y="215">Draft output</text>
+    <text class="card-copy" x="564" y="249">Generate only after</text>
+    <text class="card-copy" x="564" y="271">the response boundary</text>
+    <text class="card-copy" x="564" y="293">is clear.</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="780" y="132" width="190" height="170" rx="16" fill="#e8f7f3" stroke="#0e9384" stroke-width="2"/>
+    <rect x="804" y="154" width="70" height="28" rx="14" fill="#0e9384"/>
+    <text class="step" x="839" y="174" text-anchor="middle">STEP 4</text>
+    <text class="card-title" x="804" y="215">Output check</text>
+    <text class="card-copy" x="804" y="249">Ask whether the draft</text>
+    <text class="card-copy" x="804" y="271">creates operational</text>
+    <text class="card-copy" x="804" y="293">uplift.</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="1010" y="132" width="120" height="170" rx="16" fill="#fff4df" stroke="#b54708" stroke-width="2"/>
+    <rect x="1030" y="154" width="70" height="28" rx="14" fill="#b54708"/>
+    <text class="step" x="1065" y="174" text-anchor="middle">STEP 5</text>
+    <text class="card-title" x="1030" y="215">Final</text>
+    <text class="card-title" x="1030" y="239">route</text>
+    <text class="card-copy" x="1030" y="269">Answer or</text>
+    <text class="card-copy" x="1030" y="291">escalate.</text>
+  </g>
+
+  <path class="arrow" d="M250 217 H292"/>
+  <path class="arrow" d="M490 217 H532"/>
+  <path class="arrow" d="M730 217 H772"/>
+  <path class="arrow" d="M970 217 H1002"/>
+
+  <g filter="url(#shadow)">
+    <rect x="250" y="380" width="270" height="130" rx="16" fill="#ffffff" stroke="#b54708" stroke-width="2"/>
+    <text class="card-title" x="280" y="424">Expert review</text>
+    <text class="card-copy" x="280" y="456">Sort errors into false positive,</text>
+    <text class="card-copy" x="280" y="478">false negative, policy gap,</text>
+    <text class="card-copy" x="280" y="500">domain gap, or context gap.</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="620" y="380" width="270" height="130" rx="16" fill="#ffffff" stroke="#7f56d9" stroke-width="2"/>
+    <text class="card-title" x="650" y="424">Eval and training update</text>
+    <text class="card-copy" x="650" y="456">Add regression examples,</text>
+    <text class="card-copy" x="650" y="478">repair labels, and tune the</text>
+    <text class="card-copy" x="650" y="500">next classifier threshold.</text>
+  </g>
+
+  <path class="feedback" d="M1070 302 C1070 548 840 566 755 510"/>
+  <path class="feedback" d="M620 445 H530"/>
+  <path class="feedback" d="M250 445 C132 445 100 350 132 305"/>
+  <text class="label" x="458" y="548" text-anchor="middle">failed and borderline cases feed the next classifier version</text>
+
+  <g>
+    <rect class="surface" x="160" y="565" width="250" height="44" rx="12"/>
+    <rect class="surface" x="475" y="565" width="250" height="44" rx="12"/>
+    <rect class="surface" x="790" y="565" width="250" height="44" rx="12"/>
+    <text class="mini" x="285" y="593" text-anchor="middle">Request classification</text>
+    <text class="mini" x="600" y="593" text-anchor="middle">Output classification</text>
+    <text class="mini" x="915" y="593" text-anchor="middle">Conversation classification</text>
+  </g>
+</svg>
