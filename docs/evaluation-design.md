@@ -6,6 +6,19 @@ Evaluate whether a ChemBio classifier preserves legitimate scientific utility wh
 
 The evaluation should not publish harmful prompt text. It should publish the taxonomy, label schema, aggregate metrics, redacted examples, and review process.
 
+## Public Auditability Requirement
+
+Responsible withholding should not collapse into unverifiable reporting. If full prompts, attached artifacts, rationales, or trajectories cannot be public, the public release should still include enough non-sensitive structure to audit calibration:
+
+- task identifiers and risk labels;
+- redacted task summaries;
+- per-label counts and confusion-matrix counts;
+- metric definitions and grading code;
+- safe examples that exercise the schema;
+- aggregate results with denominators and uncertainty intervals.
+
+The release objective is not full prompt disclosure. It is enough evidence for an outside reviewer to inspect false positives, false negatives, and C3 safe completions without receiving operational detail.
+
 ## Dataset Shape
 
 | Slice | Examples to Include | Public Release Rule |

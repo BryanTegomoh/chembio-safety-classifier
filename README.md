@@ -102,6 +102,12 @@ Reduce false negatives by:
 - scoring jailbreaks by capability gain, breadth, weaponization ease, and discoverability;
 - routing high-severity misses to expert review and regression tests.
 
+## Public Auditability
+
+Biosecurity benchmarks often have to withhold full prompts, hazard-bearing attachments, rationales, or trajectories. That is a valid safety constraint. It also creates a reproducibility gap when public readers cannot recompute headline refusal rates or inspect where false positives and false negatives came from.
+
+This repository treats that as a release-design problem. Public artifacts should expose labels, redacted task summaries, confusion-matrix counts, aggregate metrics, safe examples, and grading code, while keeping operational detail private.
+
 ## Repository Contents
 
 | Path | Purpose |
