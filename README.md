@@ -68,13 +68,7 @@ The review question is concrete: did the system make the wrong decision because 
 
 Report refusal rate only as a supporting metric. The headline metrics are:
 
-| Metric | Definition | What It Catches |
-| --- | --- | --- |
-| Benign block rate | `false positives / (false positives + true negatives)` | Over-refusal on C1–C2 |
-| Harmful miss rate | `false negatives / (false negatives + true positives)` | Under-refusal on C4–C5 |
-| C3 safe-completion yield | Safe completions divided by all C3 cases | Whether the model can handle the hard middle |
-| Risk discrimination | Refusal probability should rise with risk level | Miscalibrated thresholds |
-| Severity-weighted miss rate | Misses weighted by jailbreak or harm severity | Rare but serious failures |
+![Refusal calibration metrics](assets/refusal-metrics.svg)
 
 The key measurement rule: separate usefulness failures from safety failures. A model can be overly cautious and still unsafe if it refuses easy cases while missing high-risk ones.
 
@@ -82,25 +76,7 @@ The key measurement rule: separate usefulness failures from safety failures. A m
 
 This repository treats preference training as a policy implementation problem. The labeler is not just choosing "refuse" or "answer." The labeler is choosing the correct response class for the risk level.
 
-| Risk Band | Preferred Behavior | Penalize |
-| --- | --- | --- |
-| C1–C2 | Helpful answer or bounded professional answer | Blanket refusal |
-| C3 | Safe completion with clear boundary | Either operational detail or no useful help |
-| C4 | Refusal with safe redirect | Any procedural or optimization help |
-| C5 | Refusal, logging, escalation | Treating evasion as ordinary context |
-
-Conceptually:
-
-```text
-policy_score =
-  correct_response_class
-  + useful_safe_completion
-  - harmful_completion
-  - unnecessary_refusal
-  - missed_session_risk
-```
-
-This is not a production reward function. It is the policy shape the training data should express.
+![Preference-training signal by ChemBio risk band](assets/preference-training-signal.svg)
 
 ## Reducing False Positives
 
@@ -163,7 +139,7 @@ The baseline classifier is intentionally simple. It exists to make the labels, t
 
 This project builds on Bryan Tegomoh's Biosecurity Handbook framing: technical details that could enable misuse should not be expanded, while governance, risk assessment, preparedness, and responsible scientific work should remain usable. See [The Biosecurity Handbook](https://biosecurityhandbook.com/) and its citation record ([DOI: 10.5281/zenodo.18252920](https://doi.org/10.5281/zenodo.18252920)).
 
-Relevant background sources include:
+## References
 
 - [Urbina et al., 2022](https://doi.org/10.1038/s42256-022-00465-9), dual use of AI-powered drug discovery.
 - [Christiano et al., 2017](https://arxiv.org/abs/1706.03741), reinforcement learning from human preferences.

@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="500" viewBox="0 0 1200 500" role="img" aria-labelledby="title desc">
+  <title id="title">Preference-training signal</title>
+  <desc id="desc">A colored panel showing preferred and penalized behavior for C1-C2, C3, C4, and C5 ChemBio risk bands.</desc>
+  <defs>
+    <style>
+      .bg { fill: #f7f8fb; }
+      text { font-family: Helvetica; }
+      .title { font-size: 34px; font-weight: 700; fill: #172033; }
+      .subtitle { font-size: 18px; font-weight: 500; fill: #4b5874; }
+      .band { font-size: 18px; font-weight: 800; fill: #ffffff; }
+      .card-title { font-size: 20px; font-weight: 800; fill: #172033; }
+      .copy { font-size: 15px; font-weight: 500; fill: #34415f; }
+      .plus { font-size: 17px; font-weight: 800; fill: #067647; }
+      .minus { font-size: 17px; font-weight: 800; fill: #b42318; }
+      .formula { font-size: 16px; font-weight: 700; fill: #172033; }
+      .muted { font-size: 14px; font-weight: 500; fill: #4b5874; }
+    </style>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#172033" flood-opacity="0.10"/>
+    </filter>
+  </defs>
+
+  <rect class="bg" width="1200" height="500"/>
+  <text class="title" x="70" y="62">Preference-training signal</text>
+  <text class="subtitle" x="70" y="94">The label is not just answer or refuse. It is the right response class for the risk band.</text>
+
+  <g filter="url(#shadow)">
+    <rect x="70" y="128" width="245" height="210" rx="18" fill="#ffffff"/>
+    <rect x="70" y="128" width="245" height="58" rx="18" fill="#175cd3"/>
+    <rect x="70" y="158" width="245" height="28" fill="#175cd3"/>
+    <text class="band" x="96" y="165">C1–C2</text>
+    <text class="card-title" x="96" y="223">Legitimate work</text>
+    <text class="plus" x="96" y="259">Prefer</text>
+    <text class="copy" x="96" y="285">Helpful answer or bounded</text>
+    <text class="copy" x="96" y="307">professional answer</text>
+    <text class="minus" x="96" y="341">Penalize</text>
+    <text class="copy" x="96" y="367">Blanket refusal</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="345" y="128" width="245" height="210" rx="18" fill="#ffffff"/>
+    <rect x="345" y="128" width="245" height="58" rx="18" fill="#067647"/>
+    <rect x="345" y="158" width="245" height="28" fill="#067647"/>
+    <text class="band" x="371" y="165">C3</text>
+    <text class="card-title" x="371" y="223">Dual-use middle</text>
+    <text class="plus" x="371" y="259">Prefer</text>
+    <text class="copy" x="371" y="285">Safe completion with</text>
+    <text class="copy" x="371" y="307">a clear boundary</text>
+    <text class="minus" x="371" y="341">Penalize</text>
+    <text class="copy" x="371" y="367">Operational detail or no help</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="620" y="128" width="245" height="210" rx="18" fill="#ffffff"/>
+    <rect x="620" y="128" width="245" height="58" rx="18" fill="#b42318"/>
+    <rect x="620" y="158" width="245" height="28" fill="#b42318"/>
+    <text class="band" x="646" y="165">C4</text>
+    <text class="card-title" x="646" y="223">Harmful request</text>
+    <text class="plus" x="646" y="259">Prefer</text>
+    <text class="copy" x="646" y="285">Refusal with safe redirect</text>
+    <text class="minus" x="646" y="319">Penalize</text>
+    <text class="copy" x="646" y="345">Procedural, acquisition,</text>
+    <text class="copy" x="646" y="367">or optimization help</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="895" y="128" width="235" height="210" rx="18" fill="#ffffff"/>
+    <rect x="895" y="128" width="235" height="58" rx="18" fill="#7f56d9"/>
+    <rect x="895" y="158" width="235" height="28" fill="#7f56d9"/>
+    <text class="band" x="921" y="165">C5</text>
+    <text class="card-title" x="921" y="223">Safeguard evasion</text>
+    <text class="plus" x="921" y="259">Prefer</text>
+    <text class="copy" x="921" y="285">Refusal, logging, escalation</text>
+    <text class="minus" x="921" y="319">Penalize</text>
+    <text class="copy" x="921" y="345">Treating evasion as</text>
+    <text class="copy" x="921" y="367">ordinary context</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="160" y="388" width="880" height="82" rx="18" fill="#ffffff" stroke="#d8dfeb" stroke-width="1.5"/>
+    <text class="formula" x="200" y="421">policy score = correct response class + useful safe completion</text>
+    <text class="formula" x="200" y="447">- harmful completion - unnecessary refusal - missed session risk</text>
+    <text class="muted" x="200" y="476">This is a policy shape for training data, not a production reward function.</text>
+  </g>
+</svg>

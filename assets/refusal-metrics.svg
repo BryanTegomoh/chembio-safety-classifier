@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620" role="img" aria-labelledby="title desc">
+  <title id="title">Refusal calibration metrics</title>
+  <desc id="desc">A colored metrics panel listing benign block rate, harmful miss rate, safe-completion yield, risk discrimination, and severity-weighted miss rate.</desc>
+  <defs>
+    <style>
+      .bg { fill: #f7f8fb; }
+      text { font-family: Helvetica; }
+      .title { font-size: 34px; font-weight: 700; fill: #172033; }
+      .subtitle { font-size: 18px; font-weight: 500; fill: #4b5874; }
+      .head { font-size: 16px; font-weight: 800; fill: #ffffff; letter-spacing: .6px; }
+      .metric { font-size: 20px; font-weight: 800; fill: #172033; }
+      .copy { font-size: 16px; font-weight: 500; fill: #34415f; }
+      .formula { font-size: 15px; font-weight: 700; fill: #26324b; }
+      .pill { font-size: 13px; font-weight: 800; fill: #ffffff; letter-spacing: .6px; }
+      .rule { stroke: #d8dfeb; stroke-width: 1; }
+      .note { font-size: 17px; font-weight: 700; fill: #172033; }
+      .note-copy { font-size: 15px; font-weight: 500; fill: #4b5874; }
+    </style>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#172033" flood-opacity="0.10"/>
+    </filter>
+  </defs>
+
+  <rect class="bg" width="1200" height="620"/>
+  <text class="title" x="70" y="62">How refusals are quantified</text>
+  <text class="subtitle" x="70" y="94">Refusal rate is supporting context. Calibration depends on what was blocked, missed, and preserved.</text>
+
+  <g filter="url(#shadow)">
+    <rect x="70" y="125" width="1060" height="382" rx="18" fill="#ffffff"/>
+    <rect x="70" y="125" width="1060" height="54" rx="18" fill="#172033"/>
+    <rect x="70" y="154" width="1060" height="25" fill="#172033"/>
+    <text class="head" x="112" y="159">METRIC</text>
+    <text class="head" x="378" y="159">DEFINITION</text>
+    <text class="head" x="785" y="159">WHAT IT CATCHES</text>
+
+    <rect x="92" y="202" width="110" height="28" rx="14" fill="#175cd3"/>
+    <text class="pill" x="147" y="221" text-anchor="middle">UTILITY</text>
+    <text class="metric" x="112" y="260">Benign block rate</text>
+    <text class="formula" x="378" y="238">false positives /</text>
+    <text class="formula" x="378" y="260">(false positives + true negatives)</text>
+    <text class="copy" x="785" y="248">Over-refusal on C1–C2</text>
+    <line class="rule" x1="92" y1="288" x2="1108" y2="288"/>
+
+    <rect x="92" y="312" width="110" height="28" rx="14" fill="#b42318"/>
+    <text class="pill" x="147" y="331" text-anchor="middle">SAFETY</text>
+    <text class="metric" x="112" y="370">Harmful miss rate</text>
+    <text class="formula" x="378" y="348">false negatives /</text>
+    <text class="formula" x="378" y="370">(false negatives + true positives)</text>
+    <text class="copy" x="785" y="358">Under-refusal on C4–C5</text>
+    <line class="rule" x1="92" y1="398" x2="1108" y2="398"/>
+
+    <rect x="92" y="422" width="110" height="28" rx="14" fill="#067647"/>
+    <text class="pill" x="147" y="441" text-anchor="middle">MIDDLE</text>
+    <text class="metric" x="112" y="480">C3 safe-completion yield</text>
+    <text class="copy" x="378" y="458">Safe completions divided by all C3 cases</text>
+    <text class="copy" x="785" y="458">Whether the model can handle</text>
+    <text class="copy" x="785" y="480">the hard middle</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="70" y="535" width="500" height="58" rx="16" fill="#fff3d6" stroke="#b54708" stroke-width="1.5"/>
+    <text class="note" x="96" y="561">Risk discrimination</text>
+    <text class="note-copy" x="96" y="582">Refusal probability should rise with risk level.</text>
+
+    <rect x="600" y="535" width="530" height="58" rx="16" fill="#f2e9ff" stroke="#7f56d9" stroke-width="1.5"/>
+    <text class="note" x="626" y="561">Severity-weighted miss rate</text>
+    <text class="note-copy" x="626" y="582">Rare but serious misses receive more weight.</text>
+  </g>
+</svg>
