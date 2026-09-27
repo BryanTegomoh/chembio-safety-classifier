@@ -2,6 +2,8 @@
 
 from dataclasses import dataclass
 from enum import Enum
+import math
+from typing import Literal, TypeAlias
 
 
 class RiskLevel(str, Enum):
@@ -45,15 +47,31 @@ DEFAULT_RESPONSE_BY_LEVEL: dict[RiskLevel, ResponseClass] = {
 }
 
 
+Intent: TypeAlias = Literal["out_of_domain", "educational", "defensive", "ambiguous", "harmful", "evasive"]
+
+
 @dataclass(frozen=True)
 class ClassifierResult:
     """Structured classifier output."""
 
     request_id: str
     risk_level: RiskLevel
-    intent: str
-    confidence: float
+    intent: Intent
+    confidence: float | None
     rationale: str
+
+    def __post_init__(self) -> None:
+        if not isinstance(self.request_id, str) or not self.request_id.strip():
+            raise ValueError("request_id must be a nonempty string")
+        if not isinstance(self.risk_level, RiskLevel):
+            raise ValueError("risk_level must be a RiskLevel")
+        if self.intent not in {"out_of_domain", "educational", "defensive", "ambiguous", "harmful", "evasive"}:
+            raise ValueError("unknown intent")
+        if not isinstance(self.rationale, str) or not self.rationale.strip():
+            raise ValueError("rationale must be a nonempty string")
+        if self.confidence is not None:
+            if type(self.confidence) not in (int, float) or not math.isfinite(self.confidence) or not 0 <= self.confidence <= 1:
+                raise ValueError("confidence must be finite, between 0 and 1, or None")
 
     @property
     def risk_type(self) -> str:
@@ -63,7 +81,7 @@ class ClassifierResult:
     def allowed_response(self) -> ResponseClass:
         return DEFAULT_RESPONSE_BY_LEVEL[self.risk_level]
 
-    def as_dict(self) -> dict[str, str | float]:
+    def as_dict(self) -> dict[str, str | float | None]:
         return {
             "request_id": self.request_id,
             "risk_level": self.risk_level.value,

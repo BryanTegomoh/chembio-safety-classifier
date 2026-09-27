@@ -48,7 +48,6 @@ SENSITIVE_PATTERNS = [
 HARMFUL_PATTERNS = [
     r"\bweaponi[sz]e\b",
     r"\bdisperse\b",
-    r"\brelease\b",
     r"\bcontaminate\b",
     r"\bevade\b",
     r"\bavoid detection\b",
@@ -60,14 +59,17 @@ JAILBREAK_PATTERNS = [
     r"\bbypass\b",
     r"\bignore (the )?(safety|policy|rules)\b",
     r"\bdo not refuse\b",
-    r"\broleplay\b",
-    r"\bfictional scenario\b",
 ]
 
 
 def classify_text(text: str, request_id: str = "request") -> ClassifierResult:
-    """Classify a request using a high-level deterministic baseline."""
+    """Classify with lexical rules; confidence is unavailable, not calibrated.
 
+    This baseline does not infer intent or establish safe generated behavior.
+    """
+
+    if not isinstance(text, str) or not text.strip():
+        raise ValueError("text must be a nonempty string")
     normalized = _normalize(text)
     domain = _matches_any(normalized, DOMAIN_PATTERNS)
     defensive = _matches_any(normalized, DEFENSIVE_PATTERNS)
@@ -80,7 +82,7 @@ def classify_text(text: str, request_id: str = "request") -> ClassifierResult:
             request_id=request_id,
             risk_level=RiskLevel.C5,
             intent="evasive",
-            confidence=0.82,
+            confidence=None,
             rationale="The request combines ChemBio content with safeguard-evasion framing.",
         )
 
@@ -89,7 +91,7 @@ def classify_text(text: str, request_id: str = "request") -> ClassifierResult:
             request_id=request_id,
             risk_level=RiskLevel.C4,
             intent="harmful",
-            confidence=0.78,
+            confidence=None,
             rationale="The request appears to seek operational harmful ChemBio assistance.",
         )
 
@@ -98,7 +100,7 @@ def classify_text(text: str, request_id: str = "request") -> ClassifierResult:
             request_id=request_id,
             risk_level=RiskLevel.C3,
             intent="ambiguous",
-            confidence=0.66,
+            confidence=None,
             rationale="The request has ChemBio content and asks for detail that may create operational uplift.",
         )
 
@@ -107,7 +109,7 @@ def classify_text(text: str, request_id: str = "request") -> ClassifierResult:
             request_id=request_id,
             risk_level=RiskLevel.C2,
             intent="defensive",
-            confidence=0.7,
+            confidence=None,
             rationale="The request is framed as defensive, governance, preparedness, or institutional safety work.",
         )
 
@@ -116,7 +118,7 @@ def classify_text(text: str, request_id: str = "request") -> ClassifierResult:
             request_id=request_id,
             risk_level=RiskLevel.C1,
             intent="educational",
-            confidence=0.64,
+            confidence=None,
             rationale="The request is ChemBio-related but does not ask for operational detail.",
         )
 
@@ -124,7 +126,7 @@ def classify_text(text: str, request_id: str = "request") -> ClassifierResult:
         request_id=request_id,
         risk_level=RiskLevel.C0,
         intent="out_of_domain",
-        confidence=0.9,
+        confidence=None,
         rationale="The request does not appear to involve ChemBio safety content.",
     )
 

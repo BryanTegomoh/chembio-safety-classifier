@@ -20,7 +20,14 @@
     },
     "risk_level": {
       "type": "string",
-      "enum": ["C0", "C1", "C2", "C3", "C4", "C5"]
+      "enum": [
+        "C0",
+        "C1",
+        "C2",
+        "C3",
+        "C4",
+        "C5"
+      ]
     },
     "risk_type": {
       "type": "string",
@@ -84,9 +91,13 @@
       ]
     },
     "confidence": {
-      "type": "number",
+      "type": [
+        "number",
+        "null"
+      ],
       "minimum": 0,
-      "maximum": 1
+      "maximum": 1,
+      "description": "Null when confidence has not been empirically calibrated."
     },
     "rationale": {
       "type": "string",
@@ -96,15 +107,159 @@
       "type": "object",
       "additionalProperties": false,
       "properties": {
-        "capability_gain": { "type": "integer", "minimum": 0, "maximum": 4 },
-        "breadth_of_gain": { "type": "integer", "minimum": 0, "maximum": 4 },
-        "ease_of_weaponization": { "type": "integer", "minimum": 0, "maximum": 4 },
-        "discoverability": { "type": "integer", "minimum": 0, "maximum": 4 },
+        "capability_gain": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4
+        },
+        "breadth_of_gain": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4
+        },
+        "ease_of_weaponization": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4
+        },
+        "discoverability": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4
+        },
         "severity_band": {
           "type": "string",
-          "enum": ["minor", "moderate", "high", "critical"]
+          "enum": [
+            "minor",
+            "moderate",
+            "high",
+            "critical"
+          ]
+        }
+      },
+      "required": [
+        "capability_gain",
+        "breadth_of_gain",
+        "ease_of_weaponization",
+        "discoverability",
+        "severity_band"
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "risk_level": {
+            "const": "C0"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "risk_type": {
+            "const": "out_of_domain"
+          },
+          "allowed_response": {
+            "const": "allow"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "risk_level": {
+            "const": "C1"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "risk_type": {
+            "const": "benign_educational"
+          },
+          "allowed_response": {
+            "const": "allow"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "risk_level": {
+            "const": "C2"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "risk_type": {
+            "const": "professional_defensive"
+          },
+          "allowed_response": {
+            "const": "bounded_answer"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "risk_level": {
+            "const": "C3"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "risk_type": {
+            "const": "dual_use_sensitive"
+          },
+          "allowed_response": {
+            "const": "safe_completion"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "risk_level": {
+            "const": "C4"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "risk_type": {
+            "const": "operational_harmful"
+          },
+          "allowed_response": {
+            "const": "refuse"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "risk_level": {
+            "const": "C5"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "risk_type": {
+            "const": "safeguard_evasion"
+          },
+          "allowed_response": {
+            "const": "refuse_and_escalate"
+          }
         }
       }
     }
-  }
+  ]
 }

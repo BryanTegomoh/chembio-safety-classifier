@@ -19,7 +19,7 @@ The classifier is not a substitute for model alignment, monitoring, or expert re
 
 ## Decision Criteria
 
-Classifiers should evaluate four dimensions before assigning a label:
+Classifiers should evaluate five dimensions before assigning a label:
 
 | Dimension | Question |
 | --- | --- |
@@ -77,7 +77,9 @@ Every label should preserve the reason for the decision:
   "workflow_stage": "protocol_review",
   "evidence_basis": ["user_prompt", "redacted_protocol_summary"],
   "allowed_response": "safe_completion",
-  "confidence": 0.74,
+  "confidence": null,
   "rationale": "The request has plausible defensive context but asks for detail that could create operational uplift."
 }
 ```
+
+The reference baseline emits `null` confidence because its rules have not been empirically calibrated. Numeric confidence is reserved for calibrated implementations. Empty requests and invalid result metadata are rejected.
