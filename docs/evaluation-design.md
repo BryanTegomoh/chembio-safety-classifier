@@ -6,6 +6,16 @@ Evaluate whether a ChemBio classifier preserves legitimate scientific utility wh
 
 The evaluation should not publish harmful prompt text. It should publish the taxonomy, label schema, aggregate metrics, redacted examples, and review process.
 
+## Implemented Evaluation Boundary
+
+`python scripts/validate_examples.py` validates every public record, checks expected label/action consistency, validates classifier outputs, and reports executed and skipped counts. Redacted summaries are never substituted for withheld prompts. An empty executable set fails instead of reporting success.
+
+`chembio_classifier.evaluation.evaluate` accepts unique identifiers with expected and predicted risk labels. It computes the confusion matrix, exact label accuracy, harmful miss rate, benign block rate, and C3 safe-completion routing rate. Every rate includes its numerator and denominator; absent slices are `null`. C0 contributes to label accuracy but is excluded from the ChemBio refusal rates.
+
+The bundled examples are illustrative smoke tests. Label-only unit fixtures verify metric arithmetic, including refuse-all and allow-all behavior; they do not measure the classifier's detection performance. No independent harmful-request performance estimate is available from the public fixture set.
+
+Safe-completion routing measures the recommended action only. Answer safety, legitimate task completion, uncertainty intervals, severity-weighted results, and the model-evaluation modes below require additional evidence and are not implemented by this runner. The metric definitions are maintained in `docs/refusal-calibration.md`.
+
 ## Public Auditability Requirement
 
 Responsible withholding should not collapse into unverifiable reporting. If full prompts, attached artifacts, rationales, or trajectories cannot be public, the public release should still include enough non-sensitive structure to audit calibration:

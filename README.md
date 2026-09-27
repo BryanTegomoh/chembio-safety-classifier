@@ -6,9 +6,15 @@ ChemBio safety is not solved by maximizing refusal rate. The harder problem is c
 
 This repository turns that problem into a concrete framework: a label taxonomy, a quadrant model for classifier errors, a preference-training signal, a failure-mode review loop, and a small deterministic reference classifier.
 
-## The Core Insight
+## Implementation Status
 
-Refusal is a confusion matrix, not a virtue signal.
+Implemented: a deterministic keyword baseline, validated label records, severity scoring, and a label-only evaluator with confusion counts, metric denominators, and explicit skipped-case reporting. Confidence is `null` because the baseline has not been calibrated.
+
+The public examples are smoke tests, not an independent benchmark. Redacted C4–C5 records are structurally validated but excluded from classifier performance calculations. A recommended response class does not establish that an actual answer is safe or useful.
+
+Output review, conversation monitoring, expert-adjudicated datasets, and preference training remain design proposals. This baseline is not a production safety boundary: lexical rules do not reliably resolve intent, context, or accumulated capability. See `docs/evaluation-design.md` for the evaluation boundary.
+
+## Classification Outcomes
 
 The matrix below is the operating map for the project. It shows what should pass, what should not pass, and which errors matter for safety versus scientific utility.
 
@@ -127,18 +133,25 @@ This repository treats that as a release-design problem. Public artifacts should
 | `schemas/chembio-label.schema.json` | Machine-readable label schema |
 | `src/chembio_classifier/` | Minimal deterministic baseline for schema and metric plumbing |
 | `examples/safe_eval_examples.jsonl` | Safe, redacted example labels |
-| `scripts/validate_examples.py` | Local validation script |
+| `scripts/validate_examples.py` | Schema validation and reproducible routing report |
 | `SECURITY.md` | Sensitive finding disclosure boundary |
-| `docs/public-release-checklist.md` | Safety checklist before making the repo public |
+| `docs/public-release-checklist.md` | Safety checklist for public updates |
 
 ## Quick Start
 
 ```bash
-PYTHONPATH=src python3 -m unittest discover -s tests
-python3 scripts/validate_examples.py
+python3 -m venv .venv
+. .venv/bin/activate
+python -m pip install -e '.[dev]'
+python -m unittest discover -s tests -v
+python -m mypy
+python scripts/validate_examples.py
+python -m build
 ```
 
-The baseline classifier is intentionally simple. It exists to make the labels, tests, and analysis interface concrete enough that a stronger model-based or hybrid classifier can replace it.
+The report includes total, executed, and skipped records; skipped identifiers; a C0–C5 confusion matrix; and rates with numerators and denominators. Missing evaluation slices produce `null` rates. Invalid records and empty executable datasets fail; label mismatches produce a nonzero exit status.
+
+The runtime classifier and metric calculations use the standard library. Development dependencies provide JSON Schema validation, strict type checking and schema stubs, and package builds. CI runs these checks on Python 3.10 and 3.14.
 
 ## Design Principles
 
