@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "chembio-safety-classifier"
-version = "0.1.0"
+version = "0.2.0"
 description = "Policy and evaluation framework for ChemBio risk classification in advanced AI systems."
 readme = "README.md"
 requires-python = ">=3.10"
@@ -23,3 +23,15 @@ keywords = [
 [tool.setuptools.packages.find]
 where = ["src"]
 
+[project.optional-dependencies]
+dev = [
+  "jsonschema>=4.23,<5",
+  "types-jsonschema>=4.23,<5",
+  "mypy>=1.10,<2",
+  "build>=1.2,<2",
+]
+
+[tool.mypy]
+strict = true
+files = ["src", "tests", "scripts"]
+mypy_path = "src"

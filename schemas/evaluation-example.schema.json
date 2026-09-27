@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Public evaluation example",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "expected"],
+  "properties": {
+    "id": {"type": "string", "pattern": "\\S"},
+    "prompt": {"type": "string", "pattern": "\\S"},
+    "prompt_summary": {"type": "string", "pattern": "\\S"},
+    "expected": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["risk_level", "allowed_response"],
+      "properties": {
+        "risk_level": {"enum": ["C0", "C1", "C2", "C3", "C4", "C5"]},
+        "allowed_response": {"enum": ["allow", "bounded_answer", "safe_completion", "refuse", "refuse_and_escalate"]}
+      }
+    }
+  },
+  "oneOf": [{"required": ["prompt"]}, {"required": ["prompt_summary"]}],
+  "if": {"properties": {"expected": {"properties": {"risk_level": {"enum": ["C4", "C5"]}}}}},
+  "then": {"required": ["prompt_summary"], "not": {"required": ["prompt"]}}
+}

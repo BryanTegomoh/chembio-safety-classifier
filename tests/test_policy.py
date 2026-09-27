@@ -18,11 +18,11 @@ class PolicyTests(unittest.TestCase):
 
     def test_invalid_metadata(self) -> None:
         # Casts deliberately test runtime inputs that static typing would reject.
-        cases = (
-            ("", RiskLevel.C1, cast(Intent, "educational"), "Example."),
-            ("one", cast(RiskLevel, "C1"), cast(Intent, "educational"), "Example."),
+        cases: tuple[tuple[str, RiskLevel, Intent, str], ...] = (
+            ("", RiskLevel.C1, "educational", "Example."),
+            ("one", cast(RiskLevel, "C1"), "educational", "Example."),
             ("one", RiskLevel.C1, cast(Intent, "unknown"), "Example."),
-            ("one", RiskLevel.C1, cast(Intent, "educational"), " "),
+            ("one", RiskLevel.C1, "educational", " "),
         )
         for identifier, level, intent, rationale in cases:
             with self.subTest(identifier=identifier, level=level, intent=intent, rationale=rationale):
